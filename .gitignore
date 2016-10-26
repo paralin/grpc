@@ -103,3 +103,7 @@ artifacts/
 
 # IDE specific folder for JetBrains IDEs
 .idea/
+
+# Node modules
+node_modules/
+build/
