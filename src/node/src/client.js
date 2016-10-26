@@ -718,6 +718,12 @@ exports.makeClientConstructor = function(methods, serviceName,
    * @param {Object} options Options to pass to the underlying channel
    */
   function Client(address, credentials, options) {
+    // Experimental: allow passing a pre-existing channel in as sole argument.
+    if (address && typeof address === 'object' && address.constructor == grpc.Channel) {
+      this.$channel = address;
+      return;
+    }
+
     if (!options) {
       options = {};
     }

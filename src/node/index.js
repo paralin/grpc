@@ -171,6 +171,11 @@ exports.Server = server.Server;
 exports.Metadata = Metadata;
 
 /**
+ * @see module:src/grpc_extension
+ */
+exports.Extension = grpc;
+
+/**
  * Status name to code number mapping
  */
 exports.status = grpc.status;
