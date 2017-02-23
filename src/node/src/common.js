@@ -66,10 +66,10 @@ exports.buildAsJSONOptions = function buildAsJSONOptions(enumsAsStrings,
   // and longs as strings (second argument)
   var settings = {defaults: true};
   if (longsAsStrings) {
-    settings.long = String;
+    settings.longs = String;
   }
   if (enumsAsStrings) {
-    settings.enum = String;
+    settings.enums = String;
   }
   if (binaryAsBase64) {
     settings.bytes = String;
@@ -102,7 +102,7 @@ exports.deserializeCls = function deserializeCls(cls,
    * @return {cls} The resulting object
    */
   return function deserialize(arg_buf) {
-    return cls.decode(arg_buf).asJSON(settings);
+    return cls.decode(arg_buf).toObject(settings);
   };
 };
 

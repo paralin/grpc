@@ -118,7 +118,7 @@ function largeUnary(client, done) {
   };
   client.unaryCall(arg, function(err, resp) {
     assert.ifError(err);
-    assert.strictEqual(resp.payload.type, 0);
+    assert.strictEqual(resp.payload.type, 'COMPRESSABLE');
     assert.strictEqual(resp.payload.body.length, 314159);
     if (done) {
       done();
@@ -167,7 +167,7 @@ function serverStreaming(client, done) {
   var resp_index = 0;
   call.on('data', function(value) {
     assert(resp_index < 4);
-    assert.strictEqual(value.payload.type, 0);
+    assert.strictEqual(value.payload.type, 'COMPRESSABLE');
     assert.strictEqual(value.payload.body.length,
                        arg.responseParameters[resp_index].size);
     resp_index += 1;
@@ -208,7 +208,7 @@ function pingPong(client, done) {
       payload: {body: zeroBuffer(payload_sizes[index])}
   });
   call.on('data', function(response) {
-    assert.strictEqual(response.payload.type, 0);
+    assert.strictEqual(response.payload.type, 'COMPRESSABLE');
     assert.equal(response.payload.body.length, responseSizes[index]);
     index += 1;
     if (index === 4) {
