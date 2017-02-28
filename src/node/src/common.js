@@ -42,14 +42,14 @@
 var _ = require('lodash');
 
 /**
- * Build the options object to pass to ProtoBuf.Message.asJSON
+ * Build the options object to pass to ProtoBuf.Message.toObject
  * @param {bool=} enumsAsStrings Deserialize enum fields as key strings
  *     instead of numbers. Defaults to true
  * @param {bool=} longsAsStrings Deserialize long values as strings instead of
  *     objects. Defaults to true
  * @param {bool=} binaryAsBase64 Deserialize bytes values as base64 strings
  *     instead of Buffers. Defaults to false
- * @return {Object} The options to pass to ProtoBuf.Message.asJSON
+ * @return {Object} The options to pass to ProtoBuf.Message.toObject
  */
 exports.buildAsJSONOptions = function buildAsJSONOptions(enumsAsStrings,
                                                          longsAsStrings,
@@ -225,7 +225,7 @@ exports.makeMessageConstructor = function(type, options) {
    */
   function Message(properties) {
     // Validate and format the properties as per our options.
-    var jsonObj = type.create(properties).asJSON(settings);
+    var jsonObj = type.create(properties).toObject(settings);
     // Apply the fields to the constructed object.
     Object.assign(this, jsonObj);
   }
@@ -235,13 +235,13 @@ exports.makeMessageConstructor = function(type, options) {
     return type.encode(properties).finish();
   };
   Message.decode = Message.decode64 = Message.decodeHex = function(data) {
-    return type.decode(data).asJSON(settings);
+    return type.decode(data).toObject(settings);
   };
   Message.decodeJSON = function(jsonData) {
-    return type.create(JSON.parse(jsonData)).asJSON(settings);
+    return type.create(JSON.parse(jsonData)).toObject(settings);
   };
   Message.decodeDelimited = function(data) {
-    return type.decodeDelimited(data).asJSON(settings);
+    return type.decodeDelimited(data).toObject(settings);
   };
 
   // Build compatible prototype
@@ -252,14 +252,14 @@ exports.makeMessageConstructor = function(type, options) {
     return this.encode().toString('hex');
   };
   Message.prototype.encodeJSON = function() {
-    var jsonObj = type.create(this).asJSON(settings);
+    var jsonObj = type.create(this).toObject(settings);
     return JSON.stringify(jsonObj);
   };
   Message.prototype.encodeDelimited = function() {
     return type.encodeDelimited(this).finish();
   };
   Message.prototype.toRaw = function() {
-    return type.create(this).asJSON(settings);
+    return type.create(this).toObject(settings);
   };
   Message.prototype.toBuffer = function() {
     return this.encode();

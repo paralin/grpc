@@ -831,13 +831,12 @@ exports.waitForClientReady = function(client, deadline, callback) {
  */
 exports.makeProtobufClientConstructor =  function(service, options) {
   var method_attrs = common.getProtobufServiceAttrs(service, options);
-  var deprecatedArgumentOrder = false;
-  if (options) {
-    deprecatedArgumentOrder = options.deprecatedArgumentOrder;
+  if (!options) {
+    options = {deprecatedArgumentOrder: false};
   }
   var Client = exports.makeClientConstructor(
       method_attrs, common.fullyQualifiedName(service),
-      deprecatedArgumentOrder);
+      options);
   Client.service = service;
   Client.service.grpc_options = options;
   return Client;

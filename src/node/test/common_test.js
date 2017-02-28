@@ -95,7 +95,7 @@ describe('Proto message long int serialize and deserialize', function() {
     var serialized = longSerialize({int_64: pos_value});
     assert.strictEqual(typeof longDeserialize(serialized).int_64, 'string');
     /* With the longsAsStrings option disabled, long values are represented as
-     * objects with 3 keys: low, high, and unsigned */
+     * Long objects with 3 keys: low, high, and unsigned */
     assert.strictEqual(typeof longNumDeserialize(serialized).int_64, 'object');
   });
 });

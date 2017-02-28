@@ -1,6 +1,6 @@
 {
   "name": "grpc",
-  "version": "1.1.0-dev",
+  "version": "1.2.0-dev",
   "author": "Google Inc.",
   "description": "gRPC Library for Node",
   "homepage": "http://www.grpc.io/",
@@ -50,6 +50,7 @@
     "minimist": "^1.1.0",
     "mocha": "^3.0.2",
     "mocha-jenkins-reporter": "^0.3.1",
+    "mocha-jenkins-reporter": "^0.3.0",
     "poisson-process": "^0.2.1"
   },
   "engines": {
