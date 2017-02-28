@@ -416,7 +416,7 @@ function authTest(expected_user, scope, client, done) {
   };
   client.unaryCall(arg, function(err, resp) {
     assert.ifError(err);
-    assert.strictEqual(resp.payload.type, 'COMPRESSABLE');
+    assert.strictEqual(resp.payload.type, 0);
     assert.strictEqual(resp.payload.body.length, 314159);
     assert.strictEqual(resp.username, expected_user);
     if (scope) {
